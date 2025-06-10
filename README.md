@@ -7,7 +7,8 @@ A simple command-line To-Do List application written in Python.
 - Add new tasks
 - Mark tasks as completed
 - Delete tasks from the list
-- Display the current list of tasks in the terminal
+- Display the current list of tasks
+- Tasks are stored in JSON format
 
 ## Installation
 
@@ -16,4 +17,10 @@ A simple command-line To-Do List application written in Python.
 ```bash
 git clone https://github.com/bytebitt/TaskManager
 cd TaskManager
+```
+
+2. Run Programm:
+
+```bash
+python main.py
 ```
