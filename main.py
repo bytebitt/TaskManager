@@ -138,7 +138,8 @@ def main():
         print("2. Mark Task as Completed")
         print("3. Delete Task")
         print("4. Display all Task")
-        print("5. Exit")
+        print("5. Clear Tasks List")
+        print("6. Exit")
 
         choice = input(f"{Fore.BLUE}>>> {Fore.WHITE}")
 
@@ -152,6 +153,18 @@ def main():
             case '4':
                 display_tasks()
             case '5':
+                if tasks:
+                    print(
+                        f"{Fore.YELLOW}Are you sure you want delete all tasks? (y/n)")
+                    confirmation = input(f"{Fore.BLUE}>>> {Fore.WHITE}")
+                    if confirmation.lower() == 'y':
+                        tasks.clear()
+                        print(f"{Fore.GREEN}\nTasks successfully deleted\n")
+                    else:
+                        print("...")
+                else:
+                    print("List is Empty")
+            case '6':
                 break
             case _:
                 print(f"{Fore.RED}\nIncorrect Input.\n")
