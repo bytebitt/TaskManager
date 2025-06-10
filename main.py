@@ -1,10 +1,18 @@
 from typing import List
 from colorama import Fore, init, Style
 import json
+import os
 
 init(autoreset=True)
 
 FILENAME = 'user_tasks.json'
+
+
+def clear_terminal():
+    if os.name == 'nt':
+        os.system('cls')
+    else:
+        os.system('clear')
 
 
 def load_tasks() -> List[dict[str, object]]:
@@ -39,6 +47,7 @@ def add_task() -> None:
     if not any(t['title'] == task for t in tasks):
         tasks.append({"title": task, "done": False})
         save_tasks()
+        clear_terminal()
         print(f"{Fore.GREEN}\nTask Successfully Added\n")
     else:
         print(
@@ -49,8 +58,10 @@ def add_task() -> None:
         if answer.lower() == 'y':
             tasks.append({"title": task, "done": False})
             save_tasks()
+            clear_terminal()
             print(f"\n{Fore.GREEN}Task Successfully Added\n")
         elif answer.lower() == 'n':
+            clear_terminal()
             print("...")
 
 
@@ -73,6 +84,7 @@ def mark_task() -> None:
         if 0 <= task < len(tasks):
             tasks[task]['done'] = True
             save_tasks()
+            clear_terminal()
             print(f"{Fore.GREEN}\nTask successfully Marked\n")
         else:
             print(f"{Fore.RED}\nTask doesn't exist in your tasks list\n")
@@ -102,6 +114,7 @@ def delete_task() -> None:
         if 0 <= task < len(tasks):
             tasks.pop(task)
             save_tasks()
+            clear_terminal()
             print(f"{Fore.GREEN}\nTask successfully deleted\n")
         else:
             print(f"{Fore.RED}\nTask doesn't exist in your tasks list\n")
@@ -122,6 +135,7 @@ def display_tasks() -> None:
     """
 
     if tasks:
+        clear_terminal()
         for i, task in enumerate(tasks, start=1):
             title = task['title']
             if task['done'] == True:
@@ -132,6 +146,7 @@ def display_tasks() -> None:
 
 
 def main():
+    clear_terminal()
     while True:
         print(f'{Fore.BLUE}-------- MENU --------')
         print("1. Add Task")
