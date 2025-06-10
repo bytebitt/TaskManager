@@ -14,6 +14,6 @@ A simple command-line To-Do List application written in Python.
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/bytebitt/Term-To-Do-List
+git clone https://github.com/bytebitt/TaskManager
 cd TaskManager
 ```
