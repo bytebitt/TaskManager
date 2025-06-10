@@ -9,6 +9,7 @@ A simple command-line To-Do List application written in Python.
 - Delete tasks from the list
 - Display the current list of tasks
 - Tasks are stored in JSON format
+- Clear all tasks
 
 ## Installation
 
