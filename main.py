@@ -1,9 +1,26 @@
 from typing import List
 from colorama import Fore, init, Style
+import json
 
 init(autoreset=True)
 
-tasks: List[str] = []
+FILENAME = 'user_tasks.json'
+
+
+def load_tasks() -> List[dict[str, object]]:
+    try:
+        with open(FILENAME, 'r') as file:
+            return json.load(file)
+    except FileNotFoundError:
+        return []
+
+
+def save_tasks() -> None:
+    with open(FILENAME, 'w') as file:
+        json.dump(tasks, file, indent=4)
+
+
+tasks: List[dict[str, object]] = load_tasks()
 
 
 def add_task() -> None:
@@ -21,7 +38,7 @@ def add_task() -> None:
 
     if not any(t['title'] == task for t in tasks):
         tasks.append({"title": task, "done": False})
-
+        save_tasks()
         print(f"{Fore.GREEN}\nTask Successfully Added\n")
     else:
         print(
@@ -31,6 +48,7 @@ def add_task() -> None:
 
         if answer.lower() == 'y':
             tasks.append({"title": task, "done": False})
+            save_tasks()
             print(f"\n{Fore.GREEN}Task Successfully Added\n")
         elif answer.lower() == 'n':
             print("...")
@@ -54,6 +72,7 @@ def mark_task() -> None:
 
         if 0 <= task < len(tasks):
             tasks[task]['done'] = True
+            save_tasks()
             print(f"{Fore.GREEN}\nTask successfully Marked\n")
         else:
             print(f"{Fore.RED}\nTask doesn't exist in your tasks list\n")
@@ -82,6 +101,7 @@ def delete_task() -> None:
 
         if 0 <= task < len(tasks):
             tasks.pop(task)
+            save_tasks()
             print(f"{Fore.GREEN}\nTask successfully deleted\n")
         else:
             print(f"{Fore.RED}\nTask doesn't exist in your tasks list\n")
